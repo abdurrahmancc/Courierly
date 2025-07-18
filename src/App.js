@@ -7,10 +7,12 @@ import AdminDashboard from "./components/pages/admin/adminDashboard/AdminDashboa
 import BookingHistory from "./components/pages/customer/bookingHistory/BookingHistory";
 import AgentDashboard from "./components/pages/deliveryAgent/agentDashboard/AgentDashboard";
 import RequireAuth from "./components/pages/auth/RequireAuth";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
+    <ToastContainer />
       <Routes>
         {/*--------------- public Routes --------------*/}
         {publicRoutes.map(({ path, Component }, index) => (

@@ -1,3 +1,4 @@
+import { Component } from 'react';
 import AdminDashboard from '../components/pages/admin/adminDashboard/AdminDashboard';
 import AllBookings from '../components/pages/admin/allBookings/AllBookings';
 import AllUsers from '../components/pages/admin/allUsers/AllUsers';
@@ -15,6 +16,8 @@ import AgentProfile from '../components/pages/deliveryAgent/agentProfile/AgentPr
 import AssignedParcels from '../components/pages/deliveryAgent/assignedParcels/AssignedParcels';
 import OptimizedRoute from '../components/pages/deliveryAgent/optimizedRoute/OptimizedRoute';
 import UpdateParcelStatus from '../components/pages/deliveryAgent/updateParcelStatus/UpdateParcelStatus';
+import Agents from '../components/pages/admin/Agents/Agents';
+
 
 
 
@@ -24,6 +27,7 @@ export const privateAdminRoutes = [
   { path: "dashboard", Component: AdminDashboard },
   { path: "bookings", Component: AllBookings },
   { path: "users", Component: AllUsers },
+  {path:"agents", Component: Agents},
   { path: "assign_agent", Component: AssignAgent },
   { path: "language_settings", Component: LanguageSettings },
   { path: "notifications", Component: Notifications },

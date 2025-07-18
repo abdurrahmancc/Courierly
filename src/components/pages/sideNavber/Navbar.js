@@ -1,10 +1,12 @@
 import React from "react";
 import { accessToken, removeCookie } from "../../hooks/useCookies";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  
+  const navigate = useNavigate()
   const handleSignOut = () => {
     removeCookie(accessToken);
+    navigate('/Login')
   };
 
   return (

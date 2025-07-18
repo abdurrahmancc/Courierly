@@ -41,13 +41,13 @@ const Login = () => {
         `users/getUserByEmail/${username}`
       );
       const role = userData?.user?.role;
-      let defaultRoute = "/";
-
+      let defaultRoute;
+      console.log('role', role)
       if (role === "admin") defaultRoute = "/admin";
       else if (role === "customer") defaultRoute = "/customer";
       else if (role === "deliveryAgent") defaultRoute = "/agent";
 
-      navigator(from || defaultRoute, { replace: true});
+      navigator((from.includes(defaultRoute) && from) || defaultRoute, { replace: true});
     } catch (error) {
       setIsLogin(false);
       toast.error("Login failed! Please try again", { autoClose: 1000 });

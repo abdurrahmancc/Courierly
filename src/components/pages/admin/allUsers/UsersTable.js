@@ -18,7 +18,7 @@ const UsersTable = () => {
   if (isError) return <p>Error: {error.message}</p>;
     return (
     <div className="pt-6">
-      <div className="overflow-x-auto w-full pb-[6.5rem] h-[calc(100vh-300px)]">
+      <div className="overflow-x-auto w-full h-[calc(100vh-300px)]">
         {/* ========= table start ====== */}
         <table className="table w-full ">
           {/* <!-- head --> */}

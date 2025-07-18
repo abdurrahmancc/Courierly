@@ -106,206 +106,210 @@ const ParcelBookingForm = () => {
     } catch (error) {
       console.error("Error booking parcel:", error);
       toast.error(error.response?.data?.message || "Something went wrong");
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-6 bg-base-200 rounded-lg shadow-lg"
-    >
-      {/* Grid Container */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Pickup Address */}
-        <div className="form-control col-span-1 md:col-span-2">
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Pickup Address</legend>
-            <textarea
-              name="pickupAddress"
-              value={formData.pickupAddress}
-              onChange={handleChange}
-              rows={2}
-              className={`textarea textarea-bordered w-full h-24 ${
-                errors.pickupAddress ? "textarea-error" : ""
-              }`}
-              placeholder="Enter pickup address"
-            ></textarea>
-          </fieldset>
-          {errors.pickupAddress && (
-            <label className="label">
-              <span className="label-text-alt text-error">
-                {errors.pickupAddress}
-              </span>
-            </label>
-          )}
-        </div>
-
-        {/* Delivery Address */}
-        <div className="form-control col-span-1 md:col-span-2">
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Delivery Address</legend>
-            <textarea
-              name="deliveryAddress"
-              value={formData.deliveryAddress}
-              onChange={handleChange}
-              rows={2}
-              className={`textarea textarea-bordered w-full h-24 ${
-                errors.deliveryAddress ? "textarea-error" : ""
-              }`}
-              placeholder="Enter delivery address"
-            />
-          </fieldset>
-
-          {errors.deliveryAddress && (
-            <label className="label">
-              <span className="label-text-alt text-error">
-                {errors.deliveryAddress}
-              </span>
-            </label>
-          )}
-        </div>
-
-        {/* Parcel Type */}
-        <div className="form-control">
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Parcel Type</legend>
-            <select
-              name="parcelType"
-              value={formData.parcelType}
-              onChange={handleChange}
-              className="select select-bordered w-full"
-            >
-              {parcelTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </fieldset>
-        </div>
-
-        {/* Parcel Size */}
-        <div className="form-control">
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Parcel Size</legend>
-            <select
-              name="parcelSize"
-              value={formData.parcelSize}
-              onChange={handleChange}
-              className="select select-bordered w-full"
-            >
-              {parcelSizes.map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
-          </fieldset>
-        </div>
-
-        {/* Receiver Name */}
-        <div className="form-control">
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Receiver Name</legend>
-            <input
-              type="text"
-              name="receiverName"
-              value={formData.receiverName}
-              onChange={handleChange}
-              className={`input input-bordered w-full ${
-                errors.receiverName ? "input-error" : ""
-              }`}
-              placeholder="Enter receiver's name"
-            />
-          </fieldset>
-
-          {errors.receiverName && (
-            <label className="label">
-              <span className="label-text-alt text-error">
-                {errors.receiverName}
-              </span>
-            </label>
-          )}
-        </div>
-
-        {/* Receiver Phone */}
-        <div className="form-control">
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Receiver Phone</legend>
-            <input
-              type="tel"
-              name="receiverPhone"
-              value={formData.receiverPhone}
-              onChange={handleChange}
-              className={`input input-bordered w-full ${
-                errors.receiverPhone ? "input-error" : ""
-              }`}
-              placeholder="Enter receiver's phone"
-            />
-          </fieldset>
-          {errors.receiverPhone && (
-            <label className="label">
-              <span className="label-text-alt text-error">
-                {errors.receiverPhone}
-              </span>
-            </label>
-          )}
-        </div>
-
-        {/* Amount input (only if COD) */}
-
-        <div className="form-control">
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Amount (BDT)</legend>
-            <input
-              type="number"
-              name="amount"
-              value={calculatedCost}
-              onChange={handleChange}
-              min="0"
-              className={`input input-bordered w-full ${
-                errors.amount ? "input-error" : ""
-              }`}
-              placeholder="Enter amount"
-            />
-          </fieldset>
-
-          {errors.amount && (
-            <label className="label">
-              <span className="label-text-alt text-error">{errors.amount}</span>
-            </label>
-          )}
-        </div>
-
-        {/* COD Checkbox */}
-        <div className="form-control  flex items-center  mt-8">
-          <fieldset className="fieldset">
-            <label className="label">
-              <input
-                type="checkbox"
-                name="isCOD"
-                checked={formData.isCOD}
+    <div className="overflow-y-auto w-full h-[calc(100vh-240px)]">
+      <form
+        onSubmit={handleSubmit}
+      >
+        {/* Grid Container */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Pickup Address */}
+          <div className="form-control col-span-1 md:col-span-2">
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Pickup Address</legend>
+              <textarea
+                name="pickupAddress"
+                value={formData.pickupAddress}
                 onChange={handleChange}
-                className="checkbox checkbox-primary"
-                id="codCheckbox"
-              />
-              Cash on Delivery (COD)
-            </label>
-          </fieldset>
-        </div>
-      </div>
+                rows={2}
+                className={`textarea textarea-bordered w-full h-24 ${
+                  errors.pickupAddress ? "textarea-error" : ""
+                }`}
+                placeholder="Enter pickup address"
+              ></textarea>
+            </fieldset>
+            {errors.pickupAddress && (
+              <label className="label">
+                <span className="label-text-alt text-error">
+                  {errors.pickupAddress}
+                </span>
+              </label>
+            )}
+          </div>
 
-      <button type="submit" className="btn btn-primary w-full mt-8">
-        
-         {loading? (
+          {/* Delivery Address */}
+          <div className="form-control col-span-1 md:col-span-2">
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Delivery Address</legend>
+              <textarea
+                name="deliveryAddress"
+                value={formData.deliveryAddress}
+                onChange={handleChange}
+                rows={2}
+                className={`textarea textarea-bordered w-full h-24 ${
+                  errors.deliveryAddress ? "textarea-error" : ""
+                }`}
+                placeholder="Enter delivery address"
+              />
+            </fieldset>
+
+            {errors.deliveryAddress && (
+              <label className="label">
+                <span className="label-text-alt text-error">
+                  {errors.deliveryAddress}
+                </span>
+              </label>
+            )}
+          </div>
+
+          {/* Parcel Type */}
+          <div className="form-control">
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Parcel Type</legend>
+              <select
+                name="parcelType"
+                value={formData.parcelType}
+                onChange={handleChange}
+                className="select select-bordered w-full"
+              >
+                {parcelTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </fieldset>
+          </div>
+
+          {/* Parcel Size */}
+          <div className="form-control">
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Parcel Size</legend>
+              <select
+                name="parcelSize"
+                value={formData.parcelSize}
+                onChange={handleChange}
+                className="select select-bordered w-full"
+              >
+                {parcelSizes.map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </fieldset>
+          </div>
+
+          {/* Receiver Name */}
+          <div className="form-control">
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Receiver Name</legend>
+              <input
+                type="text"
+                name="receiverName"
+                value={formData.receiverName}
+                onChange={handleChange}
+                className={`input input-bordered w-full ${
+                  errors.receiverName ? "input-error" : ""
+                }`}
+                placeholder="Enter receiver's name"
+              />
+            </fieldset>
+
+            {errors.receiverName && (
+              <label className="label">
+                <span className="label-text-alt text-error">
+                  {errors.receiverName}
+                </span>
+              </label>
+            )}
+          </div>
+
+          {/* Receiver Phone */}
+          <div className="form-control">
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Receiver Phone</legend>
+              <input
+                type="tel"
+                name="receiverPhone"
+                value={formData.receiverPhone}
+                onChange={handleChange}
+                className={`input input-bordered w-full ${
+                  errors.receiverPhone ? "input-error" : ""
+                }`}
+                placeholder="Enter receiver's phone"
+              />
+            </fieldset>
+            {errors.receiverPhone && (
+              <label className="label">
+                <span className="label-text-alt text-error">
+                  {errors.receiverPhone}
+                </span>
+              </label>
+            )}
+          </div>
+
+          {/* Amount input (only if COD) */}
+
+          <div className="form-control">
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Amount (BDT)</legend>
+              <input
+                type="number"
+                name="amount"
+                value={calculatedCost}
+                onChange={handleChange}
+                min="0"
+                className={`input input-bordered w-full ${
+                  errors.amount ? "input-error" : ""
+                }`}
+                placeholder="Enter amount"
+              />
+            </fieldset>
+
+            {errors.amount && (
+              <label className="label">
+                <span className="label-text-alt text-error">
+                  {errors.amount}
+                </span>
+              </label>
+            )}
+          </div>
+
+          {/* COD Checkbox */}
+          <div className="form-control  flex items-center  mt-8">
+            <fieldset className="fieldset">
+              <label className="label">
+                <input
+                  type="checkbox"
+                  name="isCOD"
+                  checked={formData.isCOD}
+                  onChange={handleChange}
+                  className="checkbox checkbox-primary"
+                  id="codCheckbox"
+                />
+                Cash on Delivery (COD)
+              </label>
+            </fieldset>
+          </div>
+        </div>
+
+        <div className="text-end mt-8">
+          <button type="submit" className="btn btn-primary">
+            {loading ? (
               <span className="btn-loading inline-block"></span>
             ) : (
               <span>Book Parcel</span>
             )}
-      </button>
-    </form>
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

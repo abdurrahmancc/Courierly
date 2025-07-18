@@ -4,7 +4,6 @@ import axiosPrivet from "../../../hooks/axiosPrivet";
 
 const UserRoleConfirmModal = ({ inputRoleId, refetch }) => {
   const { user, role } = inputRoleId;
-  console.log("inputRoleId............",inputRoleId)
 
   const handleAddUser = async (id) => {
     try {

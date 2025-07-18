@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import axiosPrivet from '../../../hooks/axiosPrivet';
-import Loading from '../../../sharedPages/Loading';
-import BookingHistoryTableRow from './BookingHistoryTableRow';
-import CancelBookingModel from './CancelBookingModel';
+import React, { useState } from "react";
+import { useQuery } from "react-query";
+import axiosPrivet from "../../../hooks/axiosPrivet";
+import Loading from "../../../sharedPages/Loading";
+import BookingHistoryTableRow from "./BookingHistoryTableRow";
+import CancelBookingModel from "./CancelBookingModel";
 
 const BookingHistoryTable = () => {
-      const [cancelBookModal, setCancelBookModal] = useState(null);
-      const { data, isLoading, isError, error, refetch } = useQuery("myParcels", async () => await axiosPrivet.get("parcel/my"));
+  const [cancelBookModal, setCancelBookModal] = useState(null);
+  const { data, isLoading, isError, error, refetch } = useQuery(
+    "myParcels",
+    async () => await axiosPrivet.get("parcel/my")
+  );
 
-  if (isLoading) return <Loading/>;
+  if (isLoading) return <Loading />;
   if (isError) return <p>Error: {error.message}</p>;
-    return (
-            <div className="pt-6">
+  return (
+    <div className="pt-6">
       <div className="overflow-x-auto w-full pb-[6.5rem] h-[calc(100vh-300px)]">
         {/* ========= table start ====== */}
         <table className="table w-full ">
@@ -45,7 +48,7 @@ const BookingHistoryTable = () => {
           </tbody>
         </table>
         {/* ========= table end ====== */}
-                {/* ========= delete modal start ====== */}
+        {/* ========= delete modal start ====== */}
         {cancelBookModal && (
           <CancelBookingModel
             cancelBookModal={cancelBookModal}
@@ -56,7 +59,7 @@ const BookingHistoryTable = () => {
         {/* ========= delete modal end ====== */}
       </div>
     </div>
-    );
+  );
 };
 
 export default BookingHistoryTable;

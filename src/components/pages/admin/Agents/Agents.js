@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import axiosPrivet from "../../../hooks/axiosPrivet";
-import { useNavigate } from "react-router-dom";
-import { BiSearchAlt } from "react-icons/bi";
-import { HiOutlinePlus } from "react-icons/hi";
-import UsersTable from "./UsersTable";
+import React, { useState } from 'react';
+import { HiOutlinePlus } from 'react-icons/hi';
+import { BiSearchAlt } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+import AgentsTable from './AgentsTable';
 
-const AllUsers = () => {
-  const [user, setUser] = useState();
+const Agents = () => {
+     const [user, setUser] = useState();
   const navigate = useNavigate();
-
-  const { data, isLoading, isError, error, refetch } = useQuery(
-    "getAllUsers",
-    async () => await axiosPrivet.get("users")
-  );
-
-  if (isLoading) return <p>Loading users...</p>;
-  if (isError) return <p>Error: {error.message}</p>;
 
   return (
     <div className="p-10 w-full">
       <div className="flex justify-between pb-4">
         <h4 className="uppercase text-[1.4vw]   text-white font-bold">
-          all users
+          Agents
         </h4>
       </div>
       <div className="bg-base-200 p-5">
@@ -54,10 +44,10 @@ const AllUsers = () => {
             </button>
           </div>
         </div>
-        <UsersTable />
+        <AgentsTable />
       </div>
     </div>
   );
 };
 
-export default AllUsers;
+export default Agents;

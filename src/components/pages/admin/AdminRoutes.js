@@ -18,6 +18,11 @@ export const adminRoutes = [
     icon: "",
   },
   {
+    path: "agents",
+    name: "Agents",
+    icon: "",
+  },
+  {
     path: "assign_agent",
     name: "Assign Agent",
     icon: "",

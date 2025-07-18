@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axiosPrivet from "../../../hooks/axiosPrivet";
 import { toast } from "react-toastify";
 
-const SetupProfileFrom = () => {
+const AgentGeneralForm = () => {
 const [user, setUser] = useState(null);
   const {
     register,
@@ -41,7 +41,6 @@ useEffect(() => {
 
 
   return (
-    <div className="overflow-y-auto w-full h-[calc(100vh-242px)]">
       <form onSubmit={handleSubmit(onSubmit)}  >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Phone Number */}
@@ -53,8 +52,6 @@ useEffect(() => {
               className="input input-bordered w-full"
             />
           </div>
-
-          {/* Date of Birth */}
           <div>
             <label className="label">Date of Birth</label>
             <input
@@ -64,7 +61,6 @@ useEffect(() => {
             />
           </div>
 
-          {/* NID */}
           <div>
             <label className="label">NID</label>
             <input
@@ -141,12 +137,11 @@ useEffect(() => {
         {/* Submit Button */}
         <div className="text-end mt-6">
           <button type="submit" className="btn btn-primary px-10">
-            Update
+            Update General Information
           </button>
         </div>
       </form>
-    </div>
   );
 };
 
-export default SetupProfileFrom;
+export default AgentGeneralForm;
