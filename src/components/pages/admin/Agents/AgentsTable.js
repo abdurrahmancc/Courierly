@@ -4,14 +4,12 @@ import { useQuery } from "react-query";
 import axiosPrivet from "../../../hooks/axiosPrivet";
 import AgentsTableRow from "./AgentsTableRow";
 import AgentDetailsModel from "./AgentDetailsModel";
-import Loading from "../../../sharedPages/Loading";
+import Loading from "../../../shared/Loading";
 
 const AgentsTable = () => {
   const [selectAgent, setSelectAgent] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-
-  console.log("showModal", showModal);
   const { data, isLoading, isError, error, refetch } = useQuery(
     "getAgents",
     async () => await axiosPrivet.get("agents/getAgents"), {

@@ -1,16 +1,26 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-import axiosPrivet from "../../../hooks/axiosPrivet";
-import Loading from "../../../shared/Loading";
-import BookingHistoryTableRow from "./BookingHistoryTableRow";
-import CancelBookingModel from "./CancelBookingModel";
+import React from 'react';
+import AssignedParcelsTabelRow from './AssignedParcelsTabelRow';
+import Loading from '../../../shared/Loading';
+import { useQuery } from 'react-query';
+import axiosPrivet from '../../../hooks/axiosPrivet';
+import { toast } from 'react-toastify';
 
-const BookingHistoryTable = () => {
-  const [cancelBookModal, setCancelBookModal] = useState(null);
+const AssignedParcelsTabel = () => {
   const { data, isLoading, isError, error, refetch } = useQuery(
-    "myParcels",
-    async () => await axiosPrivet.get("parcel/my")
+    "parcels",
+    async () => await axiosPrivet.get("parcel/assigned")
   );
+  const handleStatus =async(id,status)=>{
+   try {
+    const {data} = await axiosPrivet.patch(`parcel/${id}/status`,{status: status})
+    refetch()
+    console.log(data.message)
+    toast.success(data.message)
+   } catch (error) {
+    toast.error(error.message)
+    console.log(error.message)
+   }
+  }
 
   if (isLoading) return <Loading />;
   if (isError) return <p>Error: {error.message}</p>;
@@ -19,7 +29,6 @@ const BookingHistoryTable = () => {
       <div className="overflow-x-auto w-full pb-[6.5rem] h-[calc(100vh-300px)]">
         {/* ========= table start ====== */}
         <table className="table w-full ">
-          {/* <!-- head --> */}
           <thead>
             <tr>
               <th>#</th>
@@ -30,36 +39,24 @@ const BookingHistoryTable = () => {
               <th>COD</th>
               <th>Pickup Address</th>
               <th>Delivery Address</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody id="order_Table_Row" className="cursor-pointer ">
-            {/* <!-- row 1 --> */}
             {data?.data &&
               data.data.map((book, index) => (
-                <BookingHistoryTableRow
+                <AssignedParcelsTabelRow
                   key={index}
                   book={book}
                   index={index}
-                  refetch={refetch}
-                  setCancelBookModal={setCancelBookModal}
+                  handleStatus={handleStatus}
                 />
               ))}
           </tbody>
         </table>
         {/* ========= table end ====== */}
-        {/* ========= delete modal start ====== */}
-        {cancelBookModal && (
-          <CancelBookingModel
-            cancelBookModal={cancelBookModal}
-            setCancelBookModal={setCancelBookModal}
-            refetch={refetch}
-          />
-        )}
-        {/* ========= delete modal end ====== */}
       </div>
     </div>
   );
 };
 
-export default BookingHistoryTable;
+export default AssignedParcelsTabel;

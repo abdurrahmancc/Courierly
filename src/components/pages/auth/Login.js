@@ -18,7 +18,12 @@ const Login = () => {
   const [isLogin, setIsLogin] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { data:result, isLoading, isError, error } = useQuery(
+  const {
+    data: result,
+    isLoading,
+    isError,
+    error,
+  } = useQuery(
     "getUser",
     async () => await axiosPrivet.get("users/getLoginUser")
   );
@@ -35,20 +40,20 @@ const Login = () => {
       setIsLogin(true);
       const { data: result } = await axiosPrivet.post("login", info);
       Cookies.set(accessToken, result.token);
-      setIsLogin(false);
-
       const { data: userData } = await axiosPrivet.get(
         `users/getUserByEmail/${username}`
       );
       const role = userData?.user?.role;
       let defaultRoute;
-      console.log('role', role)
       if (role === "admin") defaultRoute = "/admin";
       else if (role === "customer") defaultRoute = "/customer";
       else if (role === "deliveryAgent") defaultRoute = "/agent";
+      const navigateTo = from?.includes(defaultRoute) ? from : defaultRoute;
+      navigator(navigateTo, { replace: true });
 
-      navigator((from.includes(defaultRoute) && from) || defaultRoute, { replace: true});
+      setIsLogin(false);
     } catch (error) {
+      console.log("error.message", error.message);
       setIsLogin(false);
       toast.error("Login failed! Please try again", { autoClose: 1000 });
     }
@@ -56,11 +61,13 @@ const Login = () => {
   /*---------------- submit form end --------------*/
 
   useEffect(() => {
-    if (isValidToken && location.pathname.includes("Login" || "login")) {
+    if (isValidToken) {
       let defaultRoute = "/";
       if (result?.data?.user?.role === "admin") defaultRoute = "/admin";
-      else if (result?.data?.user?.role === "customer") defaultRoute = "/customer";
-      else if (result?.data?.user?.role === "deliveryAgent") defaultRoute = "/agent";
+      else if (result?.data?.user?.role === "customer")
+        defaultRoute = "/customer";
+      else if (result?.data?.user?.role === "deliveryAgent")
+        defaultRoute = "/agent";
       navigate(from || defaultRoute, { replace: true });
     }
   }, [from, navigate, isValidToken, location.pathname]);
@@ -119,7 +126,7 @@ const Login = () => {
 
           {/* Submit Button */}
           <button type="submit" className="btn btn-primary w-full">
-            {isLogin ? (
+            {isLogin || tokenLoading ? (
               <span className="btn-loading inline-block"></span>
             ) : (
               <span>Login</span>

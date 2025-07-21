@@ -1,6 +1,6 @@
 import { MdClose } from "react-icons/md";
-import BookingHistoryTable from "../../customer/bookingHistory/BookingHistoryTable";
-import BookingTable from "../assignAgent/BookingTable";
+import BookingTable from "./BookingTable";
+
 
 const AgentDetailsModel = ({ selectAgent, onClose }) => {
   return (

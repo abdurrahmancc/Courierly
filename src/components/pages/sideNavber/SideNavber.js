@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import axiosPrivet from "../../hooks/axiosPrivet";
 import { customerRoutes } from "../customer/CustomerRoutes";
 import { deliveryAgentRouters } from "../deliveryAgent/deliveryAgentRoutes";
+import Loading from "../../shared/Loading"
 
 const SideNavber = () => {
 const [routes, setRoutes] = useState([]);
@@ -24,6 +25,8 @@ const [routes, setRoutes] = useState([]);
       setRoutes(deliveryAgentRouters);
     }
   }, [data]);
+
+  if(isLoading) return <Loading/>
 
   return (
     <>

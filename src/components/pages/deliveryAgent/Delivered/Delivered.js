@@ -1,13 +1,13 @@
 import React from "react";
-import { BiSearchAlt } from 'react-icons/bi';
-import { HiOutlinePlus } from 'react-icons/hi';
+import { BiSearchAlt } from "react-icons/bi";
+import DeliveredParcelTable from "./DeliveredParcelTable";
 
-const Notifications = () => {
+const Delivered = () => {
   return (
     <div className="p-10 w-full">
       <div className="flex justify-between pb-4">
         <h4 className="uppercase text-[1.4vw]   text-white font-bold">
-          notifications
+          Delivered Parcels
         </h4>
       </div>
       <div className="bg-base-200 p-5">
@@ -32,19 +32,12 @@ const Notifications = () => {
               </label>
             </form>
           </div>
-          <div>
-            <button
-            //   onClick={() => navigate("/register")}
-              className="btn btn-sm capitalize font-normal  text-neutral rounded-full btn-success"
-            >
-              <HiOutlinePlus className="" /> New User
-            </button>
-          </div>
+          <div></div>
         </div>
-        {/* <UsersTable /> */}
+        <DeliveredParcelTable />
       </div>
     </div>
   );
 };
 
-export default Notifications;
+export default Delivered;

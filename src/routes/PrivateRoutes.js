@@ -2,9 +2,6 @@ import { Component } from 'react';
 import AdminDashboard from '../components/pages/admin/adminDashboard/AdminDashboard';
 import AllBookings from '../components/pages/admin/allBookings/AllBookings';
 import AllUsers from '../components/pages/admin/allUsers/AllUsers';
-import AssignAgent from '../components/pages/admin/assignAgent/AssignAgent';
-import LanguageSettings from '../components/pages/admin/languageSettings/LanguageSettings';
-import Notifications from '../components/pages/admin/notifications/Notifications';
 import Reports from '../components/pages/admin/reports/Reports';
 import BookingHistory from '../components/pages/customer/bookingHistory/BookingHistory';
 import BookParcel from '../components/pages/customer/bookParcel/BookParcel'
@@ -14,9 +11,12 @@ import TrackParcel from '../components/pages/customer/trackParcel/TrackParcel';
 import AgentDashboard from '../components/pages/deliveryAgent/agentDashboard/AgentDashboard';
 import AgentProfile from '../components/pages/deliveryAgent/agentProfile/AgentProfile';
 import AssignedParcels from '../components/pages/deliveryAgent/assignedParcels/AssignedParcels';
-import OptimizedRoute from '../components/pages/deliveryAgent/optimizedRoute/OptimizedRoute';
-import UpdateParcelStatus from '../components/pages/deliveryAgent/updateParcelStatus/UpdateParcelStatus';
 import Agents from '../components/pages/admin/Agents/Agents';
+import NewBookings from '../components/pages/admin/NewBookings/NewBookings';
+import Delivered from '../components/pages/deliveryAgent/Delivered/Delivered';
+import BookingDetails from '../components/pages/admin/BookingDetails/BookingDetails';
+import Parcel from '../components/pages/deliveryAgent/parcel/Parcel';
+
 
 
 
@@ -26,11 +26,10 @@ import Agents from '../components/pages/admin/Agents/Agents';
 export const privateAdminRoutes = [
   { path: "dashboard", Component: AdminDashboard },
   { path: "bookings", Component: AllBookings },
+  { path: "bookings/:id", Component: BookingDetails },
+  { path: "new-bookings", Component: NewBookings },
   { path: "users", Component: AllUsers },
-  {path:"agents", Component: Agents},
-  { path: "assign_agent", Component: AssignAgent },
-  { path: "language_settings", Component: LanguageSettings },
-  { path: "notifications", Component: Notifications },
+  { path:"agents", Component: Agents},
   { path: "reports", Component: Reports },
 ];
 /* ============ private admin routes end =============== */
@@ -48,7 +47,7 @@ export const privateDeliveryAgentRoutes = [
   { path: "dashboard", Component:  AgentDashboard},
   { path: "agent-profile", Component: AgentProfile },
   { path: "assigned-parcels", Component: AssignedParcels },
-  { path: "optimized-route", Component: OptimizedRoute },
-  { path: "update-parcel-status", Component: UpdateParcelStatus },
+  { path: "delivered-parcels", Component: Delivered },
+  { path: "parcel/:id", Component: Parcel },
 ];
 /* ============ private delivery Agent routes emd =============== */

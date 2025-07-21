@@ -16,7 +16,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/users", data);
+      const response = await axios.post(`${process.env.REACT_APP_COURIERLY_API}/api/v1/USERS`, data);
         if(response.status == 200 && response.data.token){
             navigator('/Login');
         }

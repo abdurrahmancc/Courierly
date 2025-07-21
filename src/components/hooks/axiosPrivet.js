@@ -4,9 +4,10 @@ import { accessToken } from "./useCookies";
 
 const axiosPrivet = axios.create({
   withCredentials: true,
-  // baseURL: `${process.env.REACT_APP_FRESH_API}/api/v1/`,
+  // baseURL: `${process.env.REACT_APP_COURIERLY_API}/api/v1/`,
   baseURL: "http://localhost:5000/api/v1/",
 });
+
 axiosPrivet.interceptors.request.use(
   function (config) {
     if (!config.headers.authorization) {

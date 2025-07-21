@@ -15,13 +15,8 @@ export const deliveryAgentRouters = [
     icon: "",
   },
   {
-    path: "optimized-route",
-    name: "Optimized Route",
+    path: "delivered-parcels",
+    name: "Delivered Parcels",
     icon: "",
   },
-  {
-    path: "update-parcel-status",
-    name: "Update Parcel Status",
-    icon: "",
-  }
 ];

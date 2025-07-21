@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-import axiosPrivet from "../../../hooks/axiosPrivet";
-import Loading from "../../../shared/Loading";
-import BookingHistoryTableRow from "./BookingHistoryTableRow";
-import CancelBookingModel from "./CancelBookingModel";
+import React, { useState } from 'react';
+import Loading from '../../../shared/Loading';
+import axiosPrivet from '../../../hooks/axiosPrivet';
+import { useQuery } from 'react-query';
+import CancelBookingModel from '../../customer/bookingHistory/CancelBookingModel';
+import AllBookingsTableRow from './AllBookingsTableRow';
 
-const BookingHistoryTable = () => {
-  const [cancelBookModal, setCancelBookModal] = useState(null);
+const AllBookingsTable = () => {
+   const [cancelBookModal, setCancelBookModal] = useState(null);
   const { data, isLoading, isError, error, refetch } = useQuery(
-    "myParcels",
-    async () => await axiosPrivet.get("parcel/my")
+    "parcels",
+    async () => await axiosPrivet.get("parcel/")
   );
 
   if (isLoading) return <Loading />;
   if (isError) return <p>Error: {error.message}</p>;
   return (
     <div className="pt-6">
-      <div className="overflow-x-auto w-full pb-[6.5rem] h-[calc(100vh-300px)]">
+      <div className="overflow-x-auto w-full h-[calc(100vh-300px)]">
         {/* ========= table start ====== */}
         <table className="table w-full ">
           {/* <!-- head --> */}
@@ -30,14 +30,14 @@ const BookingHistoryTable = () => {
               <th>COD</th>
               <th>Pickup Address</th>
               <th>Delivery Address</th>
+              <th>IsAssigned</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody id="order_Table_Row" className="cursor-pointer ">
-            {/* <!-- row 1 --> */}
             {data?.data &&
               data.data.map((book, index) => (
-                <BookingHistoryTableRow
+                <AllBookingsTableRow
                   key={index}
                   book={book}
                   index={index}
@@ -62,4 +62,5 @@ const BookingHistoryTable = () => {
   );
 };
 
-export default BookingHistoryTable;
+
+export default AllBookingsTable;

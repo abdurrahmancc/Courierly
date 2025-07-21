@@ -3,7 +3,7 @@ import { useLocation, Outlet, Navigate } from "react-router-dom";
 import { accessToken, removeCookie } from "../../hooks/useCookies";
 import useValidToken from "../../hooks/useValidToken";
 import axiosPrivet from "../../hooks/axiosPrivet";
-import Loading from "../../sharedPages/Loading";
+import Loading from "../../shared/Loading";
 
 const RequireAuth = () => {
   const [loading, setLoading] = useState(true);

@@ -63,9 +63,9 @@ const UsersTableRow = ({ user, index, setDeleteModal, refetch, setInputRoleId })
           <span className="">{lastJoined && lastJoined}</span>
         </td>
         <td>
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end" onClick={(e) => e.stopPropagation()}>
             <label tabIndex="0" className=" m-1">
-              <span>
+              <span className="btn btn-sm">
                 <BsThreeDots className="text-lg" />
               </span>
             </label>

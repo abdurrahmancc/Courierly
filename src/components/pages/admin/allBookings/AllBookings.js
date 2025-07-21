@@ -1,6 +1,7 @@
 import React from "react";
 import { BiSearchAlt } from 'react-icons/bi';
 import { HiOutlinePlus } from 'react-icons/hi';
+import AllBookingsTable from "./AllBookingsTable";
 
 const AllBookings = () => {
   return (
@@ -32,16 +33,8 @@ const AllBookings = () => {
               </label>
             </form>
           </div>
-          <div>
-            <button
-            //   onClick={() => navigate("/register")}
-              className="btn btn-sm capitalize font-normal  text-neutral rounded-full btn-success"
-            >
-              <HiOutlinePlus className="" /> New User
-            </button>
-          </div>
         </div>
-        {/* <UsersTable /> */}
+        <AllBookingsTable/>
       </div>
     </div>
   );

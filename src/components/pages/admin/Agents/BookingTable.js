@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axiosPrivet from "../../../hooks/axiosPrivet";
-import Loading from "../../../sharedPages/Loading";
+import Loading from "../../../shared/Loading";
 import BookingTableRow from "./BookingTableRow";
 import { toast } from "react-toastify";
 
@@ -35,7 +35,7 @@ const BookingTable = ({ selectAgent }) => {
 
   const { data, isLoading, isError, error, refetch } = useQuery(
     "parcels",
-    async () => await axiosPrivet.get("parcel/getNewParcel")
+    async () => await axiosPrivet.get("parcel/getNewParcels")
   );
 
   if (isLoading) return <Loading />;
@@ -43,7 +43,7 @@ const BookingTable = ({ selectAgent }) => {
   return (
     <div className="pt-6">
       {data?.data.length > 0 ? (
-        <div className="overflow-x-auto w-full">
+        <div className="overflow-x-auto w-full max-h-[calc(100vh-300px)] ">
           {/* ========= table start ====== */}
           <table className="table w-full ">
             {/* <!-- head --> */}
@@ -74,13 +74,15 @@ const BookingTable = ({ selectAgent }) => {
             </tbody>
           </table>
           {/* ========= table end ====== */}
-          <div onClick={() => handleAssign()} className="flex justify-end">
-            <button className="btn btn-success ">Assign</button>
-          </div>
         </div>
       ) : (
-        <div className="flex justify-center items-center ">No new parcels found.</div>
+        <div className="flex justify-center items-center ">
+          No new parcels found.
+        </div>
       )}
+      <div onClick={() => handleAssign()} className="flex justify-end">
+        <button className="btn btn-success ">Assign</button>
+      </div>
     </div>
   );
 };

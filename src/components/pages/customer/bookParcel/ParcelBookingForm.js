@@ -304,7 +304,7 @@ const ParcelBookingForm = () => {
             {loading ? (
               <span className="btn-loading inline-block"></span>
             ) : (
-              <span>Book Parcel</span>
+              <span>Book</span>
             )}
           </button>
         </div>
