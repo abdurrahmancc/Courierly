@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
+const socket = io(`${process.env.REACT_APP_COURIERLY_API}`);
 
 const containerStyle = {
   width: "100%",

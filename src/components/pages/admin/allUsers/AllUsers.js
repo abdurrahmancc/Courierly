@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlinePlus } from "react-icons/hi";
 import UsersTable from "./UsersTable";
+import Loading from "../../../shared/Loading";
 
 const AllUsers = () => {
   const [user, setUser] = useState();
@@ -15,8 +16,8 @@ const AllUsers = () => {
     async () => await axiosPrivet.get("users")
   );
 
-  if (isLoading) return <p>Loading users...</p>;
-  if (isError) return <p>Error: {error.message}</p>;
+  if (isLoading) return <Loading/>;
+  // if (isError) return <p>Error: {error.message}</p>;
 
   return (
     <div className="p-10 w-full">
