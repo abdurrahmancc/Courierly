@@ -1,7 +1,25 @@
 import React from 'react';
 import { BsThreeDots } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const BookingHistoryTableRow = ({book, index, setCancelBookModal, refetch}) => {
+  const navigate = useNavigate()
+
+
+  
+  const handleCopyTrackId = () => {
+    if (book?._id) {
+      navigator.clipboard.writeText(book._id)
+        .then(() => {
+          toast("Tracking ID copied!");
+        })
+        .catch(err => {
+          console.log("Copy failed:", err);
+        });
+    }
+  };
+
     return (
     <tr className="hover" key={book?._id}>
       <td>{index + 1}</td>
@@ -28,6 +46,12 @@ const BookingHistoryTableRow = ({book, index, setCancelBookModal, refetch}) => {
             </li>
             <li>
               <span>Details</span>
+            </li>
+            <li onClick={()=> navigate(`/customer/track-parcel/${book?._id}`)}>
+              <span>Track</span>
+            </li>
+            <li onClick={handleCopyTrackId}>
+              <span>Copy Track Id</span>
             </li>
           </ul>
         </div>

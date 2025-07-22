@@ -40,6 +40,7 @@ export const privateCustomerRoutes = [
   { path: "customer-dashboard", Component: CustomerDashboard },
   { path: "customer-profile", Component: CustomerProfile },
   { path: "track-parcel", Component: TrackParcel },
+  { path: "track-parcel/:id", Component: TrackParcel },
 ];
 /* ============ private customer routes end =============== */
 /* ============ private delivery Agent routes start =============== */

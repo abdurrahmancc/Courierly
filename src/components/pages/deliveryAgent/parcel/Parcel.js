@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosPrivet from "../../../hooks/axiosPrivet";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import ParcelStatusModel from "./ParcelStatusModel";
 
 const Parcel = () => {
   const [parcel, setParcel] = useState();
@@ -40,65 +41,12 @@ const Parcel = () => {
         <h4 className="uppercase text-[1.4vw] text-white font-bold">
           Parcel Details
         </h4>
-        <div className="dropdown dropdown-bottom dropdown-end">
-          <div tabIndex={0} role="button" className="btn m-1 btn-success">
-            Update Status
-          </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu bg-base-300 rounded-box z-1 w-52 p-2 shadow-sm"
-          >
-            <li>
-              <button
-                onClick={() => handleStatus(parcel?._id, "PickedUp")}
-                disabled={
-                  parcel?.status === "PickedUp" ||
-                  parcel?.status === "InTransit" ||
-                  parcel?.status === "Delivered"
-                }
-                className={`btn py-5  btn-sm ${
-                  parcel?.status === "PickedUp" ||
-                  parcel?.status === "InTransit" ||
-                  parcel?.status === "Delivered"
-                    ? "opacity-50 pointer-events-none"
-                    : ""
-                }`}
-              >
-                PickedUp
-              </button>
-            </li>
-            <li className="mt-1">
-              <button
-                onClick={() => handleStatus(parcel?._id, "InTransit")}
-                disabled={
-                  parcel?.status === "InTransit" ||
-                  parcel?.status === "Delivered"
-                }
-                className={`btn py-5  btn-sm ${
-                  parcel?.status === "InTransit" ||
-                  parcel?.status === "Delivered"
-                    ? "opacity-50 pointer-events-none"
-                    : ""
-                }`}
-              >
-                InTransit
-              </button>
-            </li>
-            <li className="mt-1">
-              <button
-                onClick={() => handleStatus(parcel?._id, "Delivered")}
-                disabled={parcel?.status === "Delivered"}
-                className={`btn py-5 btn-sm ${
-                  parcel?.status === "Delivered"
-                    ? "opacity-50 pointer-events-none"
-                    : ""
-                }`}
-              >
-                Delivered
-              </button>
-            </li>
-          </ul>
-        </div>
+        <label htmlFor="parcelStatusModel" className="btn m-1 btn-success">
+          Update Status
+        </label>
+        {parcel && (
+          <ParcelStatusModel parcel={parcel} setRefetch={setRefetch} />
+        )}
       </div>
 
       {/* ==================== Parcel Details ====================== */}

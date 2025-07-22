@@ -12,6 +12,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
   const navigator = useNavigate();
@@ -71,6 +72,19 @@ const Login = () => {
       navigate(from || defaultRoute, { replace: true });
     }
   }, [from, navigate, isValidToken, location.pathname]);
+
+  const handleAdminLogin = async (email, password) => {
+    setValue("email", email);
+    setValue("password", password);
+  };
+  const handleAgentLogin = async (email, password) => {
+    setValue("email", email);
+    setValue("password", password);
+  };
+  const handleCustomerLogin = async (email, password) => {
+    setValue("email", email);
+    setValue("password", password);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-100">
@@ -141,6 +155,30 @@ const Login = () => {
             Sign up
           </Link>
         </p>
+        <div className="flex justify-center gap-5 mt-5">
+          <button
+            className="btn btn-primary btn-sm "
+            onClick={() => handleAdminLogin("admin@gmail.com", "admin@")}
+          >
+            Admin
+          </button>
+          <button
+            className="btn btn-primary btn-sm "
+            onClick={() =>
+              handleAgentLogin("deliveryagent@gmail.com", "deliveryagent@")
+            }
+          >
+            Agent
+          </button>
+          <button
+            className="btn btn-primary btn-sm "
+            onClick={() =>
+              handleCustomerLogin("customer@gmail.com", "customer@")
+            }
+          >
+            Customer
+          </button>
+        </div>
       </div>
     </div>
   );

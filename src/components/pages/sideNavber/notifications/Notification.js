@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import axiosPrivet from "../../../hooks/axiosPrivet";
 
 const Notification = ({ notification, handleCloseNotification }) => {
   const { _id, title, description, targetId } = notification;
-  console.log("notification", notification)
-  const navigate = useNavigate()
+  const [navigateRoute, setNavigateRoute] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axiosPrivet.get("users/getLoginUser");
+        const role = data?.user?.role;
+        if (role === "admin") {
+          setNavigateRoute(`/admin/bookings/${targetId}`);
+        } else if (role === "customer") {
+          setNavigateRoute(`/customer/track-parcel/${targetId}`);
+        } else if (role === "deliveryAgent") {
+          setNavigateRoute(`/agent/parcel/${targetId}`);
+        }
+      } catch (err) {
+        console.error("Failed to fetch user role", err);
+      }
+    })();
+  }, [targetId]);
+
   return (
     <div
-     onClick={(e)=>{navigate(`/admin/bookings/${targetId}`); handleCloseNotification(_id)}}
+      onClick={() => {
+        if (navigateRoute) {
+          navigate(navigateRoute);
+          handleCloseNotification(_id);
+        }
+      }}
       key={_id}
       className="bg-base-100 rounded-lg shadow-md cursor-pointer p-3 flex items-center text-start justify-between gap-2"
     >
@@ -23,12 +48,17 @@ const Notification = ({ notification, handleCloseNotification }) => {
           className="text-xs text-gray-400 mt-1"
           title={description.length > 40 ? description : undefined}
         >
-          {description.length > 40 ? `${description.slice(0, 40)}...` : description}
+          {description.length > 40
+            ? `${description.slice(0, 40)}...`
+            : description}
         </p>
       </div>
 
       <div
-        onClick={(e) => {handleCloseNotification(_id); e.stopPropagation() }}
+        onClick={(e) => {
+          handleCloseNotification(_id);
+          e.stopPropagation();
+        }}
         className="text-gray-300 hover:text-red-400 cursor-pointer"
       >
         <IoMdClose size={16} />
