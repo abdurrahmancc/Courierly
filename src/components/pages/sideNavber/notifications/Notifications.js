@@ -17,8 +17,6 @@ const Notifications = () => {
     async () => await axiosPrivet.get("notifications")
   );
 
-  console.log(result?.data?.notifications);
-  console.log("error", error);
 
   useEffect(() => {
     let isMounted = true;
@@ -77,7 +75,7 @@ const Notifications = () => {
     }
   };
 
-  if (isLoading) return <Loading />;
+  // if (isLoading) return <Loading />;
 
   return (
     <div className="dropdown dropdown-end">
